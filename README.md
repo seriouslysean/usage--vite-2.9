@@ -20,7 +20,61 @@
 
 ![Vue CLI Local Build](./docs/local-build-vue-cli.png)
 
-## Comparison
+# Comparison
+
+It's important to know the differences between modules patterns in JS as Webpack and Vite do not offer the same support. I found this [module comparison article](https://blog.sessionstack.com/how-javascript-works-the-module-pattern-comparing-commonjs-amd-umd-and-es6-modules-437f77548437) useful in breaking things down in an easy to digest manner.
+
+* CommonJS/CJS (Export modules with `module.exports` and import via `require()`)
+    * _Note: Used in Node_
+* Asynchonous Module Definition/AMD (Single function called `define()`)
+    * _Note: Requires a loader such as [RequireJS](https://requirejs.org/)_
+* ES Modules (Export modules with `export {}` and import via `import * from foo`)
+## Primary Differences
+### Webpack
+
+* Supported Modules:
+    * ES Modules, CommonJS and AMD Modules
+* Dev Server:
+    * Bundled modules served via [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) using an [Express.js](https://expressjs.com/) web server
+* Production Build:
+    * [webpack](https://webpack.js.org/)
+
+At a very basic level, when running a build webpack will:
+* Starting with an entry file
+* Build a tree of the dependencies (imports/exports/requires)
+* Transform/Compile modules (code transpilation, etc)
+* Sorts, rewrites and concatenates code based on rules (loaders)
+* Optimize the output
+* (optional/dev) Start webpack-dev -erver
+* (optional/dev) Setup sockets for HMR
+
+When a request is made to the app, it loads the generated files. The end result is that the bigger the app gets, the slower everything goes. Webpack does not scale very well because if a file changes, HMR has to regenerate the _entire_ file.
+
+| Initial Request                                           | File Changed                                                  |
+|-----------------------------------------------------------|---------------------------------------------------------------|
+| ![Vue CLI HMR: Initial Request](./docs/vue-cli-hmr-1.png) | ![Vue CLI HMR: File Change Request](./docs/vue-cli-hmr-2.png) |
+
+### Vite
+
+* Supported Modules:
+    * ES Modules
+* Dev Server:
+    * Native ES Modules, served via Vite using a [Koa](https://koajs.com/) web server
+* Production build:
+    * [Rollup](https://rollupjs.org/guide/en/)
+
+At a very basic level, when running a build vite will:
+* On first run, optimizes `node_modules`
+* Starts the Koa dev server (no bundle or complication requirements)
+* Assumes that a modern browser is being used (no babel transpilation)
+
+When a request is made to the app, the browser knows how to parse the native ES module code and will read the imports/exports to generate the requests. Vite scales well because if a file changes, it will only request the changed modules for the route you're on and any other unchanged modules will return a 304 unmodified status code.
+
+| Initial Request                                     | File Changed                                            |
+|-----------------------------------------------------|---------------------------------------------------------|
+| ![Vite HMR: Initial Request](./docs/vite-hmr-1.png) | ![Vite HMR: File Change Request](./docs/vite-hmr-2.png) |
+
+## Performance
 
 Over the course of 5 local builds:
 
