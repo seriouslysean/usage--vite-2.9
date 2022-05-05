@@ -2,6 +2,8 @@
 
 `@vue/cli 5.0.4` was used to create a standard client-side Vue application. There were minimal changes to move the initial components to more closely mimic the Vite example (`script setup` syntax) in addition to adding `"vue/setup-compiler-macros": true` to the eslint `env` object.
 
+The Vite example was generated from `vite@2.9.7` using the Vue template `npm create vite@latest my-vue-app -- --template vue`
+
 # Local Development
 
 ## Vue/Webpack (Via Vue CLI)
