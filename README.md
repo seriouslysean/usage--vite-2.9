@@ -59,7 +59,7 @@ When a request is made to the app, it loads the generated files. The end result 
 * Supported Modules:
     * ES Modules
 * Dev Server:
-    * Native ES Modules, served via Vite using a [Koa](https://koajs.com/) web server
+    * Bundled modules are transformed with [esbuild](https://esbuild.github.io/) and served via Native ES Modules using a [Koa](https://koajs.com/) web server
 * Production build:
     * [Rollup](https://rollupjs.org/guide/en/)
 
