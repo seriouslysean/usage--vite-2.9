@@ -94,3 +94,4 @@ Using Webpack as our baseline, Vite blows it out of the water when it comes to b
 - [Vite Documention: Slow Server Start](https://vitejs.dev/guide/why.html#slow-server-start)
 - [How Does Vite Work](https://harlanzw.com/blog/how-the-heck-does-vite-work/)
 - [Next Generation Frontend Tooling With ViteJS](https://www.youtube.com/watch?v=UJypSr8IhKY)
+- [How Vite Commands Work](https://github.com/vitejs/vite/discussions/2213#discussioncomment-401225)
