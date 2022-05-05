@@ -43,11 +43,11 @@ It's important to know the differences between modules patterns in JS as Webpack
 
 At a very basic level, when running a build webpack will:
 * Starting with an entry file
-* Build a tree of the dependencies (imports/exports/requires)
+* Build a tree of the dependencies (`import`/`export`/`require`)
 * Transform/Compile modules (code transpilation, etc)
 * Sorts, rewrites and concatenates code based on rules (loaders)
 * Optimize the output
-* (optional/dev) Start webpack-dev -erver
+* (optional/dev) Start `webpack-dev-server`
 * (optional/dev) Setup sockets for HMR
 
 When a request is made to the app, it loads the generated files. The end result is that the bigger the app gets, the slower everything goes. Webpack does not scale very well because if a file changes, HMR has to regenerate the _entire_ file.
@@ -86,6 +86,10 @@ Over the course of 5 local builds:
 | Vite    | 471ms  | 271ms  | 257ms  | 237ms  | 271ms  | 301.4   | +782.48% |
 
 Using Webpack as our baseline, Vite blows it out of the water when it comes to build speed. On average, Vite is `782.48%` faster than Webpack.
+
+# Notes
+
+There is a middle ground! Using something like `esbuild-loader` would allow you to swap out `ts-loader` or `babel-loader`, which massively improves build speeds. There's a really good article called [webpack or esbuild: Why not both](https://blog.logrocket.com/webpack-or-esbuild-why-not-both/) that has a lot more information.
 # Technology
 
 - [Vue CLI](https://cli.vuejs.org/)
